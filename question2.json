@@ -1,0 +1,10 @@
+{
+    "question": "This is another question.",
+    "answers": [
+        "Option A",
+        "Option B",
+        "Option C",
+        "Option D"
+    ],
+    "correct": "A"
+}
