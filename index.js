@@ -26,8 +26,6 @@ const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('
 
 const row = new ActionRowBuilder();
 global.row = row;	// To make accessible in command files
-	// For random
-	/*
 	row.addComponents(
 		new ButtonBuilder()
 			.setCustomId('A')
@@ -45,7 +43,31 @@ global.row = row;	// To make accessible in command files
 			.setCustomId('D')
 			.setLabel('D')
 			.setStyle(ButtonStyle.Primary),
-	);*/
+	);
+//global.fileArr = ["question1.json", "question2.json"];
+//global.fileName = "";
+//global.rand = 0;
+//global.correct_answer = "";
+//testing
+fileArr = ["question1.json", "question2.json"];
+fileName = "";
+rand = 0;
+q1 = JSON.parse(fs.readFileSync(fileArr[0]));
+q2 = JSON.parse(fs.readFileSync(fileArr[1]));
+answers_arr1 = q1.answers;
+answers_str1 = "";
+answers_arr2 = q2.answers;
+answers_str2 = "";
+correctArr = [q1.correct, q2.correct];
+//correct_answer = "";
+for (i = 0; i < answers_arr1.length; i++) {
+    answers_str1 += "\n\t" + answers_arr1[i];
+    answers_str2 += "\n\t" + answers_arr2[i];
+}
+content_str1 = 'Question: ' + q1.question + answers_str1;
+content_str2 = 'Question: ' + q2.question + answers_str2;
+//global.contents = "";
+//end testing
 
 for (const file of commandFiles) {
 	const filePath = path.join(commandsPath, file);
@@ -68,10 +90,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	const command = interaction.client.commands.get(interaction.commandName);
 
 	if (interaction.isButton()) {
-		//console.log('Button clicked');
-		//await interaction.reply('Button Clicked!');
-		//if (interaction.customId == corr) {
-		if (interaction.customId == correct) {
+		if (interaction.customId == correct_answer) {
 			await interaction.reply('Correct');
 		} else {
 			await interaction.reply('Incorrect');
@@ -83,10 +102,17 @@ client.on(Events.InteractionCreate, async interaction => {
 		return;
 	}
 
-	// For question
-	
-	if (interaction.commandName === 'question') {
-		row.addComponents(
+	if (interaction.commandName === 'random') {
+		rand = Math.floor(Math.random() * 2);
+		fileName = fileArr[rand];
+		if (fileName == fileArr[0]) {
+			global.contents = content_str1;
+		} else {
+			global.contents = content_str2;
+		}
+		global.correct_answer = correctArr[rand];
+		
+		/*row.addComponents(
 			new ButtonBuilder()
 				.setCustomId('A')
 				.setLabel('A')
@@ -103,10 +129,11 @@ client.on(Events.InteractionCreate, async interaction => {
 				.setCustomId('D')
 				.setLabel('D')
 				.setStyle(ButtonStyle.Primary),
-		);
+		);*/
 	}
 
 	try {
+		console.log("test")
 		await command.execute(interaction);
 	} catch (error) {
 		console.error(error);
@@ -118,4 +145,4 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 });
 
-client.login("TOKEN");
+client.login("MTA4OTI5MDA0NDkwNjQxODE5Nw.GpubTR.ifgsCrRleELMM5ulEhbmN1z4qQi-YsXEgQ-q1A");

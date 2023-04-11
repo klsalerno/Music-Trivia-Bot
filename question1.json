@@ -1,10 +1,10 @@
 {
-    "question": "This is a question.",
+    "question": "This is question 1.",
     "answers": [
-        "Option A",
-        "Option B",
-        "Option C",
-        "Option D"
+        "Option A: Question 1",
+        "Option B: Question 1",
+        "Option C: Question 1",
+        "Option D: Question 1"
     ],
     "correct": "C"
 }

@@ -18,8 +18,10 @@ global.correct = correct;
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('question')
-		.setDescription('Gives a question'),
+		.setDescription('Gives a question (old, delete later).'),
 	async execute(interaction) {
+		//console.log(fileName);
+		//console.log(rand); // goes twice
         await interaction.reply({ content: content_str, components: [row]});
     },
 };

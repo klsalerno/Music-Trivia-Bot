@@ -18,6 +18,7 @@ This bot is written in JavaScript.
 | ---         | ---                         |
 | `/commands` | Gives list of bot commands  |
 | `/help`     | Provides info about the bot |
+| `/random`   | Gives a randomized question |
 | *add more*  | Description of command      |
 
 ## Resources Used
