@@ -1,10 +1,10 @@
 {
-    "question": "This is question 2.",
+    "question": "What instrument typically has 6 strings",
     "answers": [
-        "Option A: Question 2",
-        "Option B: Question 2",
-        "Option C: Question 2",
-        "Option D: Question 2"
+        "Option A: Guitar",
+        "Option B: Bass",
+        "Option C: Piano",
+        "Option D: Drums"
     ],
     "correct": "A"
 }

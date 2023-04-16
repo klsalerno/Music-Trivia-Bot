@@ -1,10 +1,10 @@
 {
-    "question": "This is question 1.",
+    "question": "What band/individual had the best selling album of the 21st century?",
     "answers": [
-        "Option A: Question 1",
-        "Option B: Question 1",
-        "Option C: Question 1",
-        "Option D: Question 1"
+        "Option A: Eminem",
+        "Option B: Lady Gaga",
+        "Option C: Adele",
+        "Option D: Evanescence"
     ],
     "correct": "C"
 }

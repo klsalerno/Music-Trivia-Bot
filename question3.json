@@ -1,10 +1,10 @@
 {
-    "question": "This is question 3.",
+    "question": "Who was one of the Lawyers involved in the Napster case",
     "answers": [
-        "Option A: Question 3",
-        "Option B: Question 3",
-        "Option C: Question 3",
-        "Option D: Question 3"
+        "Option A: David Bowie",
+        "Option B: John Smith",
+        "Option C: Peter Dordal",
+        "Option D: David Boies"
     ],
     "correct": "D"
 }
