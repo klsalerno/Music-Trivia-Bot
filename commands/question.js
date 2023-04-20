@@ -18,7 +18,7 @@ global.correct = correct;
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('question')
-		.setDescription('Gives a question (old, delete later).'),
+		.setDescription('Starts a quiz of music related questions.'),
 	async execute(interaction) {
 		//console.log(fileName);
 		//console.log(rand); // goes twice

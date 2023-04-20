@@ -66,6 +66,7 @@ for (i = 0; i < answers_arr1.length; i++) {
 }
 content_str1 = 'Question: ' + q1.question + answers_str1;
 content_str2 = 'Question: ' + q2.question + answers_str2;
+question_num = 1;
 //global.contents = "";
 //end testing
 
@@ -90,10 +91,15 @@ client.on(Events.InteractionCreate, async interaction => {
 	const command = interaction.client.commands.get(interaction.commandName);
 
 	if (interaction.isButton()) {
-		if (interaction.customId == correct_answer) {
-			await interaction.reply('Correct');
+		if (question_num == 1 && interaction.customId == q1.correct) {
+			//await interaction.reply('Correct');
+			question_num = 2;
+			await interaction.reply({ content: 'Correct!\n\n' + content_str2, components: [row]});
+		} else if (question_num == 2 && interaction.customId == q2.correct) {
+			question_num = 3;
+			await interaction.reply('Correct! You finished the quiz') // change and keep going for question3 etc
 		} else {
-			await interaction.reply('Incorrect');
+			await interaction.reply('Incorrect, try again.');
 		}
 		return;
 	}
@@ -145,4 +151,4 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 });
 
-client.login("NEW-TOKEN");
+client.login("MTA4OTI5MDA0NDkwNjQxODE5Nw.Grgtk2.dvIEnBzXysEmdvhnzvJD5L3jWQE_nut5g2EQBc");
