@@ -154,4 +154,4 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 });
 
-client.login("MTA4OTI5MDA0NDkwNjQxODE5Nw.GrQAs4.gVa-3j-gUgGrqdEQugR3-zzZU1_j86ylz7gMSc");
+client.login("NEW-TOKEN");
