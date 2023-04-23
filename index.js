@@ -44,36 +44,33 @@ global.row = row;	// To make accessible in command files
 			.setLabel('D')
 			.setStyle(ButtonStyle.Primary),
 	);
-//global.fileArr = ["question1.json", "question2.json"];
-//global.fileName = "";
-//global.rand = 0;
-//global.correct_answer = "";
-//testing
-fileArr = ["question1.json", "question2.json"];
+	
+fileArr = ["question1.json", "question2.json", "question3.json"];
 fileName = "";
 rand = 0;
 q1 = JSON.parse(fs.readFileSync(fileArr[0]));
 q2 = JSON.parse(fs.readFileSync(fileArr[1]));
+q3 = JSON.parse(fs.readFileSync(fileArr[2]));
 answers_arr1 = q1.answers;
 answers_str1 = "";
 answers_arr2 = q2.answers;
 answers_str2 = "";
+answers_arr3 = q3.answers;
+answers_str3 = "";
 correctArr = [q1.correct, q2.correct];
-//correct_answer = "";
 for (i = 0; i < answers_arr1.length; i++) {
     answers_str1 += "\n\t" + answers_arr1[i];
     answers_str2 += "\n\t" + answers_arr2[i];
+	answers_str3 += "\n\t" + answers_arr3[i];
 }
 content_str1 = 'Question: ' + q1.question + answers_str1;
 content_str2 = 'Question: ' + q2.question + answers_str2;
+content_str3 = 'Question: ' + q3.question + answers_str3;
 question_num = 1;
-//global.contents = "";
-//end testing
 
 for (const file of commandFiles) {
 	const filePath = path.join(commandsPath, file);
 	const command = require(filePath);
-	// Set a new item in the Collection with the key as the command name and the value as the exported module
 	if ('data' in command && 'execute' in command) {
 		client.commands.set(command.data.name, command);
 	} else {
@@ -92,12 +89,14 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	if (interaction.isButton()) {
 		if (question_num == 1 && interaction.customId == q1.correct) {
-			//await interaction.reply('Correct');
 			question_num = 2;
 			await interaction.reply({ content: 'Correct!\n\n' + content_str2, components: [row]});
 		} else if (question_num == 2 && interaction.customId == q2.correct) {
 			question_num = 3;
-			await interaction.reply('Correct! You finished the quiz') // change and keep going for question3 etc
+			await interaction.reply({ content: 'Correct!\n\n' + content_str3, components: [row]});
+		} else if (question_num == 3 && interaction.customId == q3.correct) {
+			question_num = 1;
+			await interaction.reply('Correct! You finished the quiz')
 		} else {
 			await interaction.reply('Incorrect, try again.');
 		}
@@ -117,29 +116,9 @@ client.on(Events.InteractionCreate, async interaction => {
 			global.contents = content_str2;
 		}
 		global.correct_answer = correctArr[rand];
-		
-		/*row.addComponents(
-			new ButtonBuilder()
-				.setCustomId('A')
-				.setLabel('A')
-				.setStyle(ButtonStyle.Primary),
-			new ButtonBuilder()
-				.setCustomId('B')
-				.setLabel('B')
-				.setStyle(ButtonStyle.Primary),
-				new ButtonBuilder()
-				.setCustomId('C')
-				.setLabel('C')
-				.setStyle(ButtonStyle.Primary),
-				new ButtonBuilder()
-				.setCustomId('D')
-				.setLabel('D')
-				.setStyle(ButtonStyle.Primary),
-		);*/
 	}
 
 	try {
-		console.log("test")
 		await command.execute(interaction);
 	} catch (error) {
 		console.error(error);

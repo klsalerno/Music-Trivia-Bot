@@ -1,3 +1,7 @@
+/**
+ * This command was used for testing purposes.
+ */
+
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
