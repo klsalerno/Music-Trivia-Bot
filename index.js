@@ -45,27 +45,42 @@ global.row = row;	// To make accessible in command files
 			.setStyle(ButtonStyle.Primary),
 	);
 	
-fileArr = ["question1.json", "question2.json", "question3.json"];
+fileArr = ["question1.json", "question2.json", "question3.json", "question4.json", "question5.json", "question6.json"];
 fileName = "";
 rand = 0;
 q1 = JSON.parse(fs.readFileSync(fileArr[0]));
 q2 = JSON.parse(fs.readFileSync(fileArr[1]));
 q3 = JSON.parse(fs.readFileSync(fileArr[2]));
+q4 = JSON.parse(fs.readFileSync(fileArr[3]));
+q5 = JSON.parse(fs.readFileSync(fileArr[4]));
+q6 = JSON.parse(fs.readFileSync(fileArr[5]));
 answers_arr1 = q1.answers;
 answers_str1 = "";
 answers_arr2 = q2.answers;
 answers_str2 = "";
 answers_arr3 = q3.answers;
 answers_str3 = "";
+answers_arr4 = q4.answers;
+answers_str4 = "";
+answers_arr5 = q5.answers;
+answers_str5 = "";
+answers_arr6 = q6.answers;
+answers_str6 = "";
 correctArr = [q1.correct, q2.correct];
 for (i = 0; i < answers_arr1.length; i++) {
     answers_str1 += "\n\t" + answers_arr1[i];
     answers_str2 += "\n\t" + answers_arr2[i];
 	answers_str3 += "\n\t" + answers_arr3[i];
+	answers_str4 += "\n\t" + answers_arr4[i];
+    answers_str5 += "\n\t" + answers_arr5[i];
+	answers_str6 += "\n\t" + answers_arr6[i];
 }
 content_str1 = 'Question: ' + q1.question + answers_str1;
 content_str2 = 'Question: ' + q2.question + answers_str2;
 content_str3 = 'Question: ' + q3.question + answers_str3;
+content_str4 = 'Question: ' + q4.question + answers_str4;
+content_str5 = 'Question: ' + q5.question + answers_str5;
+content_str6 = 'Question: ' + q6.question + answers_str6;
 question_num = 1;
 
 for (const file of commandFiles) {
@@ -95,8 +110,17 @@ client.on(Events.InteractionCreate, async interaction => {
 			question_num = 3;
 			await interaction.reply({ content: 'Correct!\n\n' + content_str3, components: [row]});
 		} else if (question_num == 3 && interaction.customId == q3.correct) {
+			question_num = 4;
+			await interaction.reply({ content: 'Correct!\n\n' + content_str4, components: [row]});
+		} else if (question_num == 4 && interaction.customId == q4.correct) {
+			question_num = 5;
+			await interaction.reply({ content: 'Correct!\n\n' + content_str5, components: [row]});
+		} else if (question_num == 5 && interaction.customId == q5.correct) {
+			question_num = 6;
+			await interaction.reply({ content: 'Correct!\n\n' + content_str6, components: [row]});
+		} else if (question_num == 6 && interaction.customId == q6.correct) {
 			question_num = 1;
-			await interaction.reply('Correct! You finished the quiz')
+			await interaction.reply('Correct! You finished the quiz!');
 		} else {
 			await interaction.reply('Incorrect, try again.');
 		}
@@ -130,4 +154,4 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 });
 
-client.login("NEW-TOKEN");
+client.login("MTA4OTI5MDA0NDkwNjQxODE5Nw.GrQAs4.gVa-3j-gUgGrqdEQugR3-zzZU1_j86ylz7gMSc");
