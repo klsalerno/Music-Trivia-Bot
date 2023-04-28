@@ -2,9 +2,7 @@
 
 Music-Trivia-Bot is an open source project for a Discord Bot for the course *Open Source Computing*.
 
-Download: URL here
-
-## About the Bot
+## Misson Statement / About the Bot
 
 This bot is constructed as a way for quiz users in a Discord server on music related questions.
 
@@ -16,8 +14,8 @@ This bot is written in JavaScript.
 
 | Command      | Description                 |
 | ---          | ---                         |
-| `/commands`  | Gives list of bot commands  |
 | `/about`     | Info about the bot          |
+| `/commands`  | Gives list of bot commands  |
 | `/howtoplay` | How to start & play a quiz game |
 | `/question`  | Starts a quiz of music related questions |
 | `/random`    | Gives a randomized question (doesn't work correctly) |
