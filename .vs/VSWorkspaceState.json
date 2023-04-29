@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\commands",
+    "\\events"
   ],
-  "SelectedNode": "\\question3.json",
+  "SelectedNode": "\\question4.json",
   "PreviewInSolutionExplorer": false
 }
