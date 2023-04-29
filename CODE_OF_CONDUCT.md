@@ -10,7 +10,7 @@ Unacceptable topics/ social commentary:
 # Usage
 The use of this bot is encouraged and we hope that you enjoy the funtionality. 
 We also hope that any party or individual will also follow the Code of Conduct attributed below. 
-#Attribution
+# Attribution
 This Code of Conduct is adapted from the Contributor Covenant, version 1.4, available at https://www.contributor-covenant.org/version/1/4/code-of-conduct.html
 
 For answers to common questions about this code of conduct, see https://www.contributor-covenant.org/faq
