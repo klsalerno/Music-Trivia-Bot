@@ -1,3 +1,8 @@
+/**
+ * This file is the main file for the bot. It includes code to log potential errors
+ * that can occur when testing.
+ */
+
 const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
@@ -24,6 +29,7 @@ client.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
+// Make a row to include multiple buttons
 const row = new ActionRowBuilder();
 global.row = row;	// To make accessible in command files
 	row.addComponents(
@@ -35,25 +41,28 @@ global.row = row;	// To make accessible in command files
 			.setCustomId('B')
 			.setLabel('B')
 			.setStyle(ButtonStyle.Primary),
-			new ButtonBuilder()
+		new ButtonBuilder()
 			.setCustomId('C')
 			.setLabel('C')
 			.setStyle(ButtonStyle.Primary),
-			new ButtonBuilder()
+		new ButtonBuilder()
 			.setCustomId('D')
 			.setLabel('D')
 			.setStyle(ButtonStyle.Primary),
 	);
-	
+
+// Code for series of questions
 fileArr = ["question1.json", "question2.json", "question3.json", "question4.json", "question5.json", "question6.json"];
 fileName = "";
 rand = 0;
+// Read through each question's JSON file and assign data to variables
 q1 = JSON.parse(fs.readFileSync(fileArr[0]));
 q2 = JSON.parse(fs.readFileSync(fileArr[1]));
 q3 = JSON.parse(fs.readFileSync(fileArr[2]));
 q4 = JSON.parse(fs.readFileSync(fileArr[3]));
 q5 = JSON.parse(fs.readFileSync(fileArr[4]));
 q6 = JSON.parse(fs.readFileSync(fileArr[5]));
+// From the data variables, make variables that hold the data of the array of answer options
 answers_arr1 = q1.answers;
 answers_str1 = "";
 answers_arr2 = q2.answers;
@@ -66,7 +75,8 @@ answers_arr5 = q5.answers;
 answers_str5 = "";
 answers_arr6 = q6.answers;
 answers_str6 = "";
-correctArr = [q1.correct, q2.correct];
+correctArr = [q1.correct, q2.correct]; // For random command, not used
+// Populate the answers strings with information from the arrays taken from the JSON files
 for (i = 0; i < answers_arr1.length; i++) {
     answers_str1 += "\n\t" + answers_arr1[i];
     answers_str2 += "\n\t" + answers_arr2[i];
@@ -75,13 +85,14 @@ for (i = 0; i < answers_arr1.length; i++) {
     answers_str5 += "\n\t" + answers_arr5[i];
 	answers_str6 += "\n\t" + answers_arr6[i];
 }
+// Variables that hold what the bot will reply: question and answer options
 content_str1 = 'Question: ' + q1.question + answers_str1;
 content_str2 = 'Question: ' + q2.question + answers_str2;
 content_str3 = 'Question: ' + q3.question + answers_str3;
 content_str4 = 'Question: ' + q4.question + answers_str4;
 content_str5 = 'Question: ' + q5.question + answers_str5;
 content_str6 = 'Question: ' + q6.question + answers_str6;
-question_num = 1;
+question_num = 1; // Keeps track of the current question number for checking button presses
 
 for (const file of commandFiles) {
 	const filePath = path.join(commandsPath, file);
@@ -102,10 +113,13 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	const command = interaction.client.commands.get(interaction.commandName);
 
+	// Condition if a button is pressed
 	if (interaction.isButton()) {
+		// If the current question is question 1 & the custom id letter (see line 37, 41, 45, 49)
+		// is the same as the correct answer for that question (from JSON file)
 		if (question_num == 1 && interaction.customId == q1.correct) {
-			question_num = 2;
-			await interaction.reply({ content: 'Correct!\n\n' + content_str2, components: [row]});
+			question_num = 2; // Increment question number
+			await interaction.reply({ content: 'Correct!\n\n' + content_str2, components: [row]}); // Print next question
 		} else if (question_num == 2 && interaction.customId == q2.correct) {
 			question_num = 3;
 			await interaction.reply({ content: 'Correct!\n\n' + content_str3, components: [row]});
@@ -122,7 +136,7 @@ client.on(Events.InteractionCreate, async interaction => {
 			question_num = 1;
 			await interaction.reply('Correct! You finished the quiz!');
 		} else {
-			await interaction.reply('Incorrect, try again.');
+			await interaction.reply('Incorrect, try again.'); // Prompt user to try answering again
 		}
 		return;
 	}
@@ -131,6 +145,8 @@ client.on(Events.InteractionCreate, async interaction => {
 		return;
 	}
 
+	// Code to generate a random number to access a question and answer in an array of index (random number)
+	// Command does not function as intended
 	if (interaction.commandName === 'random') {
 		rand = Math.floor(Math.random() * 2);
 		fileName = fileArr[rand];
@@ -154,4 +170,4 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 });
 
-client.login("NEW-TOKEN");
+client.login("TOKEN");

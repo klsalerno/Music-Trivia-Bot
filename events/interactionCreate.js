@@ -1,3 +1,7 @@
+/**
+ * This file is a listener for when an interaction is received
+ */
+
 const { Events } = require('discord.js');
 
 module.exports = {
