@@ -1,3 +1,8 @@
+/**
+ * This command successfully runs, this helps the user understand what commands should be used on the discord server.
+ *
+ * The functionality lies in outputting the commands to the users with a breif discription.
+ */
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
