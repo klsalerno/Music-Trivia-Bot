@@ -1,3 +1,8 @@
+/**
+ * This command is used to provide a general set of information on the bot and its functionality. 
+ * 
+ */
+
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
